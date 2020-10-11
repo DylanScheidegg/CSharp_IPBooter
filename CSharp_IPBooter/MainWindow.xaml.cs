@@ -17,6 +17,7 @@ namespace CSharp_IPBooter
     /// google 172.217.12.196
     public partial class MainWindow : Window
     {
+        // Initial Variables
         string strMessageFile;
         string[] proxies;
         int count;
@@ -27,23 +28,29 @@ namespace CSharp_IPBooter
 
         public MainWindow()
         {
+            // Initializing
             InitializeComponent();
 
+            // Initializing timer
             inter = 1;
             dt.Interval = TimeSpan.FromSeconds(inter);
             dt.Tick += dtTicker;
             started = false;
-
+            
+            // When to stop
             if (count == 1000)
             {
                 dt.Stop();
             }
         }
 
+        // Timer method
         private void dtTicker(object sender, EventArgs e)
         {
+            // Changing proxy
             lbUsingIP.Content = proxies[count];
 
+            // Count the packets sent
             lbPacketsSent.Content = Convert.ToString(count);
             count++;
         }
